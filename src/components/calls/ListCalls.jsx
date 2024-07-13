@@ -47,9 +47,6 @@ function ListCalls() {
     }
   }, [currentTab, data])
 
-  console.log(count)
-
-
   const archiveAll = useCallback(async () => {
     if(data) {
       const ids = Object.values(data).map((call) => call.id)
