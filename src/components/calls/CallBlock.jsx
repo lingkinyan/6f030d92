@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { useSWRConfig } from "swr";
 import axios from "axios";
 const { DateTime } = require("luxon");
@@ -6,6 +7,7 @@ const isEmpty = require('lodash.isempty');
 
 import { BASE_URL, GET_CALLS } from "../../endpoints.js";
 import callGrouping from "../../utilities/callGrouping.js"
+import CallRecord from "../../constants/propTypes/CallRecord.js"
 
 import CallDetails from "./CallDetails.jsx";
 import Button from "@mui/material/Button";
@@ -66,6 +68,11 @@ function CallBlock({ date, records }) {
       )}
     </Box>
   );
+}
+
+CallBlock.propTypes = {
+  date: PropTypes.string.isRequired,
+  records: PropTypes.arrayOf(PropTypes.shape(CallRecord)).isRequired,
 }
 
 export default CallBlock;

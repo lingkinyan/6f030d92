@@ -1,5 +1,9 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Typography from "@mui/material/Typography";
+import Directions from "../../constants/directions.js"
+import CallTypes from "../../constants/callTypes.js"
+import CallRecord from "../../constants/propTypes/CallRecord.js"
 
 import Item from "../common/Item.jsx";
 import Box from "@mui/material/Box";
@@ -22,15 +26,15 @@ function CallDetails({
   count,
 }) {
   const displayIcon = {
-    inbound: {
-      answered: <PhoneCallbackIcon color="green" />,
-      missed: <PhoneMissedIcon color="red" />,
-      voicemail: <VoicemailIcon color="red" />,
+    [Directions.inbound]: {
+      [CallTypes.answered]: <PhoneCallbackIcon color="green" />,
+      [CallTypes.missed]: <PhoneMissedIcon color="red" />,
+      [CallTypes.voicemail]: <VoicemailIcon color="red" />,
     },
-    outbound: {
-      answered: <PhoneForwardedIcon color="green" />,
-      missed: <PhoneForwardedIcon color="green" />,
-      voicemail: <PhoneForwardedIcon color="green" />,
+    [Directions.outbound]: {
+      [CallTypes.answered]: <PhoneForwardedIcon color="green" />,
+      [CallTypes.missed]: <PhoneForwardedIcon color="green" />,
+      [CallTypes.voicemail]: <PhoneForwardedIcon color="green" />,
     },
   }[direction][call_type];
 
@@ -86,6 +90,11 @@ function CallDetails({
       </Grid>
     </Grid>
   );
+}
+
+CallDetails.propTypes = {
+  ...CallRecord,
+  onClick:  PropTypes.func.isRequired,
 }
 
 export default CallDetails;
