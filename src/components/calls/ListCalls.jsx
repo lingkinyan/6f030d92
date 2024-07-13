@@ -72,7 +72,7 @@ function ListCalls() {
           <>
             <AllChatsActions count={count} onUnarchive={() => unArchiveAll()} onArchive={() => archiveAll()}/>
             {Object.entries(calls).map(([date, value], index) => (
-              <CallBlock key={index} currentTab={currentTab} date={date} records={value} />
+              <CallBlock key={index} date={date} records={value} />
             ))}
           </>
         ) : (
