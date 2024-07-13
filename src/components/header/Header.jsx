@@ -9,7 +9,6 @@ import TuneIcon from '@mui/icons-material/Tune';
 
 const Header = () => {
   const { currentTab, setCurrentTab } = useContext(TabContext);
-  console.log(TABS)
 
   return (
     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
