@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import useSWR from "swr";
 import axios from "axios";
 
-import { BASE_URL, GET_CALLS, RESET } from "../endpoints.js";
+import { BASE_URL, GET_CALLS } from "../endpoints.js";
 
 const fetcher = async (url) => {
   const res = await axios.get(url);
