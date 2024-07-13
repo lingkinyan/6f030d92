@@ -5,8 +5,8 @@ import axios from "axios";
 import { BASE_URL, GET_CALLS } from "../endpoints.js";
 
 const fetcher = async (url) => {
-  const res = await axios.get(url);
-  return res.data;
+    const res = await axios.get(url);
+    return res.data;
 };
 
 export const CallContext = createContext({
@@ -14,6 +14,7 @@ export const CallContext = createContext({
   isLoading: false,
   displayingCount: 0,
   setDisplayingCount: () => {},
+  error: {},
 });
 
 function CallProvider({ children }) {
@@ -24,14 +25,14 @@ function CallProvider({ children }) {
 
   const [count, setCount] = useState(0)
 
-  const { data, isLoading, isValidating } = useSWR(
+  const { data, isLoading, isValidating, error } = useSWR(
     BASE_URL.concat(GET_CALLS),
     fetcher
   );
 
   useEffect(() => {
-    if (data) setInfo({ data, isLoading: isLoading && isValidating });
-    else setInfo({ data: [], isLoading: false });
+    if (data) setInfo({ data, isLoading: isLoading && isValidating, error });
+    else setInfo({ data: [], isLoading: false, error });
   }, [data]);
 
   return (
@@ -40,6 +41,7 @@ function CallProvider({ children }) {
       isLoading: info.isLoading,
       displayingCount: count,
       setDisplayingCount: setCount,
+      error
     }}>
       {children}
     </CallContext.Provider>

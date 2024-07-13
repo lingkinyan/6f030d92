@@ -28,7 +28,7 @@ const App = () => {
           <Grid item xs={1}>
             <Header />
           </Grid>
-          <Grid item my={1} flex="1" sx={{ overflowY: "scroll " }}>
+          <Grid item my={1} container direction="column" flex="1" sx={{ overflowY: "scroll " }}>
             <ListCalls />
           </Grid>
           <Grid item xs={1}>
