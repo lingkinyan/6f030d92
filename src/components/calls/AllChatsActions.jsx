@@ -58,10 +58,10 @@ function AllChatsActions({ count, onUnarchive, onArchive }) {
         alignItems="center"
         sx={{
           "&:hover": {
-            cursor: "pointer",
+            cursor: displayCount !== 0 && "pointer",
           },
         }}
-        onClick={() => setOpen(true)}
+        onClick={() => displayCount !== 0 && setOpen(true)}
       >
         <Grid item xs={2}>
           {content.icon}
