@@ -13,10 +13,13 @@ import Item from "../common/Item.jsx";
 import { Tabs } from "../../constants/tabs.js";
 import { TabContext } from "../../providers/TabProvider.jsx";
 
-function AllChatsActions({ onUnarchive, onArchive }) {
+function AllChatsActions({ count, onUnarchive, onArchive }) {
   const { currentTab } = useContext(TabContext);
   const [open, setOpen] = useState(false);
+  const [ displayCount, setDisplayCount ] = useState(0);
   const [ content, setContent ] = useState({});
+
+  useEffect(() => { setDisplayCount(count) }, [count])
 
   useEffect(() => {
     let temp = {};
@@ -67,7 +70,7 @@ function AllChatsActions({ onUnarchive, onArchive }) {
         </Grid>
         <Grid item>
           <Typography>
-            {content.displayText} all calls
+            {content.displayText} all calls {`(${displayCount})`}
           </Typography>
         </Grid>
       </Grid>
@@ -79,7 +82,7 @@ function AllChatsActions({ onUnarchive, onArchive }) {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Are you sure you want to{" "}
-              {content.displayText.toLowerCase()} all chats ?
+              {content.displayText.toLowerCase()} all {`(${displayCount})`} chats ?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
