@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import PropTypes from 'prop-types';
 import Grid from "@mui/material/Grid";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import UnarchiveIcon from "@mui/icons-material/Unarchive";
@@ -91,6 +92,12 @@ function AllChatsActions({ count, onUnarchive, onArchive }) {
       )}
     </Item>
   );
+}
+
+AllChatsActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onUnarchive: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
 }
 
 export default AllChatsActions;
