@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from "react";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import axios from "axios";
 
 import { BASE_URL, GET_CALLS, RESET } from "../endpoints.js";
