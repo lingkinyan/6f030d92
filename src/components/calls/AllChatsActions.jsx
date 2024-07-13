@@ -50,8 +50,6 @@ function AllChatsActions({ count, onUnarchive, onArchive }) {
     setOpen(false);
   };
 
-
-
   return (
     <Item>
       <Grid
@@ -82,7 +80,7 @@ function AllChatsActions({ count, onUnarchive, onArchive }) {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Are you sure you want to{" "}
-              {content.displayText.toLowerCase()} all {`(${displayCount})`} chats ?
+              {content.displayText.toLowerCase()} all chats ?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
