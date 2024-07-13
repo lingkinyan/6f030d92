@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
-import Box from '@mui/material/Box';
-import { styled } from "@mui/material/styles";
-import {CallContext} from '../../providers/CallProvider.jsx'
 
-import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
@@ -11,7 +8,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import BrightnessLowIcon from '@mui/icons-material/BrightnessLow';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import DialpadIcon from '@mui/icons-material/Dialpad';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import { styled } from "@mui/material/styles";
+
+import {CallContext} from '../../providers/CallProvider.jsx'
 
 const DialButton = styled(BottomNavigationAction)({
   position: 'absolute',

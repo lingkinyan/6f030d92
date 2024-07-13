@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-import { useSWRConfig } from "swr";
 import axios from "axios";
-const { DateTime } = require("luxon");
-const isEmpty = require('lodash.isempty');
+import { useSWRConfig } from "swr";
 
-import { BASE_URL, GET_CALLS } from "../../endpoints.js";
-import callGrouping from "../../utilities/callGrouping.js"
-import CallRecord from "../../constants/propTypes/CallRecord.js"
-
-import CallDetails from "./CallDetails.jsx";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
@@ -18,6 +11,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
+
+import CallDetails from "./CallDetails.jsx";
+import callGrouping from "../../utilities/callGrouping.js"
+import CallRecord from "../../constants/propTypes/CallRecord.js"
+import { BASE_URL, GET_CALLS } from "../../endpoints.js";
+
+const isEmpty = require('lodash.isempty');
+const { DateTime } = require("luxon");
 
 function CallBlock({ date, records }) {
   const { mutate } = useSWRConfig();

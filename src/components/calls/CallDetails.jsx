@@ -1,17 +1,18 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import Typography from "@mui/material/Typography";
-import Directions from "../../constants/directions.js"
-import CallTypes from "../../constants/callTypes.js"
-import CallRecord from "../../constants/propTypes/CallRecord.js"
 
-import Item from "../common/Item.jsx";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import PhoneCallbackIcon from "@mui/icons-material/PhoneCallback";
 import PhoneForwardedIcon from "@mui/icons-material/PhoneForwarded";
 import PhoneMissedIcon from "@mui/icons-material/PhoneMissed";
 import VoicemailIcon from "@mui/icons-material/Voicemail";
+
+import Item from "../common/Item.jsx";
+import Directions from "../../constants/directions.js"
+import CallTypes from "../../constants/callTypes.js"
+import CallRecord from "../../constants/propTypes/CallRecord.js"
 
 function CallDetails({
   is_archived,
