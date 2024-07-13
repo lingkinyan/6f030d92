@@ -42,8 +42,8 @@ function Footer() {
         <DialButton icon={<DialpadIcon />}/>
         <BottomNavigationAction disabled icon={<BrightnessLowIcon />} />
         <BottomNavigationAction disabled icon={<FiberManualRecordIcon />} />
-        <Typography sx={{ position: 'absolute', top: "0", left: "20%" }}>{ displayingCount }</Typography>
       </BottomNavigation>
+      <Typography sx={{ position: 'absolute', top: "0", left: "20%" }}>{ displayingCount }</Typography>
     </Box>
   );
 }
