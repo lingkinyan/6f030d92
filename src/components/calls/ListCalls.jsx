@@ -15,7 +15,7 @@ import { TabContext } from '../../providers/TabProvider.jsx'
 import { Tabs } from '../../constants/tabs.js'
 
 function ListCalls() {
-  const { data, isLoading } = useContext(CallContext);
+  const { data, isLoading, setDisplayingCount } = useContext(CallContext);
   const { currentTab } = useContext(TabContext);
   const [ count, setCount ] = useState(0);
   const [ calls, setCalls ] = useState([]);
@@ -23,11 +23,11 @@ function ListCalls() {
 
   useEffect(() => {
     if(data.length) {
-      let temp = 0;
+      let archivedCount = 0;
       const filteredData = data
         .filter((call) => {
           if (currentTab === Tabs.INBOX) return !call.is_archived;
-          if (call.is_archived) temp ++;
+          if (call.is_archived) archivedCount ++;
           return true;
         })
       const mappedData = filteredData.map((call) => ({
@@ -43,7 +43,8 @@ function ListCalls() {
           return acc;
         }, {});
       setCalls(mappedData);
-      setCount(currentTab === Tabs.INBOX ? filteredData.length : temp);
+      setCount(currentTab === Tabs.INBOX ? filteredData.length : archivedCount);
+      setDisplayingCount(filteredData.length)
     }
   }, [currentTab, data])
 

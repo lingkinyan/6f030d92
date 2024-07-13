@@ -12,6 +12,8 @@ const fetcher = async (url) => {
 export const CallContext = createContext({
   data: [],
   isLoading: false,
+  displayingCount: 0,
+  setDisplayingCount: () => {},
 });
 
 function CallProvider({ children }) {
@@ -19,6 +21,8 @@ function CallProvider({ children }) {
     data: [],
     isLoading: false,
   });
+
+  const [count, setCount] = useState(0)
 
   const { data, isLoading, isValidating } = useSWR(
     BASE_URL.concat(GET_CALLS),
@@ -30,7 +34,16 @@ function CallProvider({ children }) {
     else setInfo({ data: [], isLoading: false });
   }, [data]);
 
-  return <CallContext.Provider value={info}>{children}</CallContext.Provider>;
+  return (
+    <CallContext.Provider value={{
+      data: info.data,
+      isLoading: info.isLoading,
+      displayingCount: count,
+      setDisplayingCount: setCount,
+    }}>
+      {children}
+    </CallContext.Provider>
+  )
 }
 
 export default CallProvider;
