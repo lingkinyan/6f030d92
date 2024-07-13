@@ -20,19 +20,24 @@ const callGrouping = (callArray) => {
   }
 
   while (rightPointer < callArray.length) {
-    if (callArray[leftPointer].createdAt === callArray[rightPointer].createdAt) rightPointer++;
+    if (callArray[leftPointer].createdAt === callArray[rightPointer].createdAt)
+      rightPointer++;
     else {
       // calculation here
-      groupedArray = groupedArray.concat(Object.values(categorizeCall(leftPointer, rightPointer)));
+      groupedArray = groupedArray.concat(
+        Object.values(categorizeCall(leftPointer, rightPointer))
+      );
       // at the end shift the left pointer
       leftPointer = rightPointer;
     }
   }
 
   if (leftPointer !== rightPointer) {
-    return groupedArray.concat(Object.values(categorizeCall(leftPointer, rightPointer)));
+    return groupedArray.concat(
+      Object.values(categorizeCall(leftPointer, rightPointer))
+    );
   }
-  return groupedArray
+  return groupedArray;
 };
 
 export default callGrouping;

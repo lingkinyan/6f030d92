@@ -1,6 +1,6 @@
-const keyMirror = require('keymirror');
+const keyMirror = require("keymirror");
 
 export const Tabs = keyMirror({
-    INBOX: null,
-    ALL_CALLS: null,
+  INBOX: null,
+  ALL_CALLS: null,
 });

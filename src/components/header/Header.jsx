@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 
-import AirCall from "./AirCall.jsx"
-import { TabContext } from '../../providers/TabProvider.jsx'
-import { Tabs as TABS} from '../../constants/tabs';
+import AirCall from "./AirCall.jsx";
+import { TabContext } from "../../providers/TabProvider.jsx";
+import { Tabs as TABS } from "../../constants/tabs";
 import { Box, Tabs, Tab } from "@mui/material";
-import TuneIcon from '@mui/icons-material/Tune';
-
+import TuneIcon from "@mui/icons-material/Tune";
 
 const Header = () => {
   const { currentTab, setCurrentTab } = useContext(TabContext);
@@ -22,15 +21,15 @@ const Header = () => {
         {Object.values(TABS).map((tab) => (
           <Tab
             key={tab}
-            label={tab.replace('_', ' ')}
+            label={tab.replace("_", " ")}
             value={tab}
             sx={{
               "&:hover": {
                 cursor: "pointer",
               },
-              fontSize: '0.6rem',
-              minWidth: '80px',
-              padding: 0
+              fontSize: "0.6rem",
+              minWidth: "80px",
+              padding: 0,
             }}
           />
         ))}

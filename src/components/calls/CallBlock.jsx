@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import axios from "axios";
 import { useSWRConfig } from "swr";
 
@@ -13,11 +13,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 
 import CallDetails from "./CallDetails.jsx";
-import callGrouping from "../../utilities/callGrouping.js"
-import CallRecord from "../../constants/propTypes/CallRecord.js"
+import callGrouping from "../../utilities/callGrouping.js";
+import CallRecord from "../../constants/propTypes/CallRecord.js";
 import { BASE_URL, GET_CALLS } from "../../endpoints.js";
 
-const isEmpty = require('lodash.isempty');
+const isEmpty = require("lodash.isempty");
 const { DateTime } = require("luxon");
 
 function CallBlock({ date, records }) {
@@ -26,27 +26,36 @@ function CallBlock({ date, records }) {
   const [sorted, setSorted] = useState(records);
 
   const handleOnConfirmation = async ({ id, isArchived }) => {
-    await axios.patch(BASE_URL.concat(GET_CALLS).concat(`/${id}`), { is_archived: isArchived ? false : true });
+    await axios.patch(BASE_URL.concat(GET_CALLS).concat(`/${id}`), {
+      is_archived: isArchived ? false : true,
+    });
     mutate(BASE_URL.concat(GET_CALLS));
     setTarget({});
-  }
+  };
 
   useEffect(() => {
-    if(records.length) {
+    if (records.length) {
       const sorted = records
-        .sort((a,b) => a.created_at > b.created_at ? 1 : -1)
-        .map((record) => ({ ...record, createdAt: DateTime.fromISO(record.created_at).toFormat("hh:mm a") }))
-      setSorted(callGrouping(sorted))
+        .sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
+        .map((record) => ({
+          ...record,
+          createdAt: DateTime.fromISO(record.created_at).toFormat("hh:mm a"),
+        }));
+      setSorted(callGrouping(sorted));
     }
-  }, [records])
+  }, [records]);
 
   return (
     <Box my={1}>
-      <Typography variant="h6" sx={{ textAlign: 'center' }}>{date}</Typography>
+      <Typography variant="h6" sx={{ textAlign: "center" }}>
+        {date}
+      </Typography>
       {sorted.map((record) => (
         <CallDetails
           key={record.id}
-          onClick={() => setTarget({ id: record.id, isArchived: record.is_archived })}
+          onClick={() =>
+            setTarget({ id: record.id, isArchived: record.is_archived })
+          }
           {...record}
         />
       ))}
@@ -74,6 +83,6 @@ function CallBlock({ date, records }) {
 CallBlock.propTypes = {
   date: PropTypes.string.isRequired,
   records: PropTypes.arrayOf(PropTypes.shape(CallRecord)).isRequired,
-}
+};
 
 export default CallBlock;

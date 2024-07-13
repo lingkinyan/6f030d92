@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import Grid from "@mui/material/Grid";
 import ArchiveIcon from "@mui/icons-material/Archive";
@@ -19,20 +19,22 @@ import { TabContext } from "../../providers/TabProvider.jsx";
 function AllChatsActions({ count, onUnarchive, onArchive }) {
   const { currentTab } = useContext(TabContext);
   const [open, setOpen] = useState(false);
-  const [ displayCount, setDisplayCount ] = useState(0);
-  const [ content, setContent ] = useState({});
+  const [displayCount, setDisplayCount] = useState(0);
+  const [content, setContent] = useState({});
 
-  useEffect(() => { setDisplayCount(count) }, [count])
+  useEffect(() => {
+    setDisplayCount(count);
+  }, [count]);
 
   useEffect(() => {
     let temp = {};
     switch (currentTab) {
-      case (Tabs.INBOX): {
+      case Tabs.INBOX: {
         temp = {
           icon: <ArchiveIcon />,
           displayText: "Archive",
           dialogTitle: "Archiving",
-        }
+        };
         break;
       }
       default: {
@@ -40,12 +42,12 @@ function AllChatsActions({ count, onUnarchive, onArchive }) {
           icon: <UnarchiveIcon />,
           displayText: "Unarchive",
           dialogTitle: "Unarchiving",
-        }
+        };
         break;
       }
     }
-    setContent(temp)
-  }, [currentTab])
+    setContent(temp);
+  }, [currentTab]);
 
   const handleOnConfirmation = () => {
     if (currentTab === Tabs.INBOX) onArchive();
@@ -82,8 +84,8 @@ function AllChatsActions({ count, onUnarchive, onArchive }) {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Are you sure you want to{" "}
-              {content.displayText.toLowerCase()} all chats ?
+              Are you sure you want to {content.displayText.toLowerCase()} all
+              chats ?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -100,6 +102,6 @@ AllChatsActions.propTypes = {
   count: PropTypes.number.isRequired,
   onUnarchive: PropTypes.func.isRequired,
   onArchive: PropTypes.func.isRequired,
-}
+};
 
 export default AllChatsActions;

@@ -1,9 +1,9 @@
 import React from "react";
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon from "@mui/material/SvgIcon";
 
 function AirCall() {
   return (
-    <SvgIcon sx={{ width: 'auto' }}>
+    <SvgIcon sx={{ width: "auto" }}>
       <svg
         viewBox="0 0 486 168"
         version="1.1"
