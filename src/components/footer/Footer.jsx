@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
-import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
 import {CallContext} from '../../providers/CallProvider.jsx'
 
+import Avatar from '@mui/material/Avatar';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
@@ -11,6 +12,18 @@ import BrightnessLowIcon from '@mui/icons-material/BrightnessLow';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import DialpadIcon from '@mui/icons-material/Dialpad';
 import { Typography } from '@mui/material';
+
+const DialButton = styled(BottomNavigationAction)({
+  position: 'absolute',
+  top:"-20%",
+  zIndex: 10,
+  backgroundColor: 'rgb(105, 189, 65)',
+  borderRadius: '400%',
+  minWidth: 40,
+  width: 40,
+  height: 40,
+  padding: 0,
+});
 
 function Footer() {
   const { displayingCount } = useContext(CallContext);
@@ -24,36 +37,12 @@ function Footer() {
           setValue(newValue);
         }}
       >
-        <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item xs={5} container>
-                <Grid item xs={6} sx={{ position: 'relative '}}>
-                    <Typography sx={{ position: 'absolute', top: "-100%", right: 0 }}>{ displayingCount }</Typography>
-                    <BottomNavigationAction icon={<LocalPhoneIcon />} />
-                </Grid>
-                <Grid item xs={6}>
-                    <BottomNavigationAction icon={<PersonIcon />} />
-                </Grid>
-            </Grid>
-            <Grid item xs={5} container>
-                <Grid item xs={6}>
-                    <BottomNavigationAction icon={<BrightnessLowIcon />} />
-                </Grid>
-                <Grid item xs={6}>
-                    <BottomNavigationAction icon={<FiberManualRecordIcon />} />
-                </Grid>
-            </Grid>
-        </Grid>
-        <Grid container justifyContent="center" alignItems="center" sx={{
-            position: 'absolute',
-            top:"-50%",
-            textAlign: "center",
-            backgroundColor: 'rgb(105, 189, 65)',
-            borderRadius: '400%',
-            width: 60,
-            height: 60,
-        }}>
-            <DialpadIcon fontSize='large'/>
-        </Grid>
+        <BottomNavigationAction icon={<LocalPhoneIcon />} />
+        <BottomNavigationAction disabled icon={<PersonIcon />} />
+        <DialButton icon={<DialpadIcon />}/>
+        <BottomNavigationAction disabled icon={<BrightnessLowIcon />} />
+        <BottomNavigationAction disabled icon={<FiberManualRecordIcon />} />
+        <Typography sx={{ position: 'absolute', top: "0", left: "20%" }}>{ displayingCount }</Typography>
       </BottomNavigation>
     </Box>
   );
