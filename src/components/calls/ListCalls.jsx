@@ -3,6 +3,7 @@ import axios from "axios";
 import { BASE_URL, GET_CALLS, RESET } from "../../endpoints.js";
 import { useSWRConfig } from "swr";
 
+import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 
@@ -23,6 +24,7 @@ function ListCalls() {
   const { currentTab } = useContext(TabContext);
   const [count, setCount] = useState(0);
   const [calls, setCalls] = useState([]);
+  const [internalFetch, setInternalFetch] = useState(false);
   const { mutate } = useSWRConfig();
 
   useEffect(() => {
@@ -49,11 +51,13 @@ function ListCalls() {
       setCalls(mappedData);
       setCount(currentTab === Tabs.INBOX ? filteredData.length : archivedCount);
       setDisplayingCount(filteredData.length);
+      setInternalFetch(false);
     }
   }, [currentTab, data]);
 
   const archiveAll = useCallback(async () => {
     if (data) {
+      setInternalFetch(true)
       const ids = Object.values(data).map((call) => call.id);
       for (const id of ids) {
         await axios.patch(BASE_URL.concat(GET_CALLS).concat(`/${id}`), {
@@ -62,7 +66,7 @@ function ListCalls() {
       }
       mutate(BASE_URL.concat(GET_CALLS));
     }
-  }, [currentTab, data]);
+  }, [currentTab, internalFetch, data]);
 
   const unArchiveAll = async () => {
     await axios.patch(BASE_URL.concat(RESET));
@@ -70,7 +74,20 @@ function ListCalls() {
   };
 
   if (!isEmpty(error)) return <Error />;
-  else if (isLoading) return <CircularProgress />;
+  else if (isLoading || internalFetch) {
+    return (
+    <Grid
+      item
+      xs={12}
+      flex="1"
+      container
+      justifyContent="center"
+      alignItems="center"
+    >
+        <CircularProgress />
+      </Grid>
+    )
+  }
   return (
     <main>
       {Object.entries(calls).length ? (
